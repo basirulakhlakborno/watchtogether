@@ -1,0 +1,1146 @@
+.player-controls-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    transparent 15%,
+    transparent 85%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: auto; // Always allow clicks for play/pause toggle
+
+  &.visible {
+    opacity: 1;
+  }
+
+  // Show controls on hover even when not visible class
+  &:hover {
+    opacity: 1;
+  }
+
+  // Center click area for play/pause
+  .center-click-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+    pointer-events: auto;
+    background: transparent;
+  }
+
+  // Make sure controls are above the click area
+  .controls-top,
+  .controls-bottom {
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
+  }
+
+  .controls-top {
+    padding: 1rem;
+    pointer-events: auto;
+
+    @media (max-width: 768px) {
+      padding: 0.75rem;
+    }
+
+    @media (max-width: 480px) {
+      padding: 0.5rem;
+    }
+  }
+
+  .progress-bar-container {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    position: relative;
+    margin-top: 0.5rem;
+    padding: 4px 0;
+    touch-action: none;
+
+    @media (max-width: 480px) {
+      height: 8px;
+      padding: 3px 0;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 5px;
+      position: relative;
+      overflow: visible;
+      transition: height 0.2s ease;
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent, #ffffff) 0%, rgba(255, 255, 255, 0.9) 100%);
+        border-radius: 5px;
+        transition: width 0.1s linear;
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+      }
+
+      .progress-handle {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        background: transparent;
+        border-radius: 50%;
+        opacity: 0;
+        transition: all 0.2s ease;
+        cursor: grab;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+
+        @media (max-width: 480px) {
+          width: 18px;
+          height: 18px;
+        }
+
+        .progress-handle-icon {
+          width: 100%;
+          height: 100%;
+          color: var(--accent, #ffffff);
+          filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+        }
+
+        &:active {
+          cursor: grabbing;
+          transform: translate(-50%, -50%) scale(1.2);
+        }
+      }
+    }
+
+    &:hover .progress-bar,
+    &:active .progress-bar {
+      height: 12px;
+
+      @media (max-width: 480px) {
+        height: 10px;
+      }
+    }
+
+    &:hover .progress-handle,
+    &:active .progress-handle {
+      opacity: 1;
+    }
+  }
+
+  .controls-bottom {
+    padding: 0 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    pointer-events: auto;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.6) 30%,
+        rgba(0, 0, 0, 0.4) 60%,
+        rgba(0, 0, 0, 0.2) 80%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0 1rem 0.75rem;
+      gap: 0.625rem;
+
+      &::before {
+        height: 100px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      padding: 0 0.75rem 0.5rem;
+      gap: 0.5rem;
+
+      &::before {
+        height: 90px;
+      }
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      order: 1;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+
+      @media (max-width: 480px) {
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    .controls-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      order: 2;
+    }
+
+    .controls-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1;
+
+      @media (max-width: 768px) {
+        gap: 0.75rem;
+      }
+
+      @media (max-width: 480px) {
+        gap: 0.5rem;
+      }
+    }
+
+    .controls-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+  }
+
+  .control-btn {
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffffff;
+    transition: all 0.2s ease;
+    padding: 0;
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      width: 44px;
+      height: 44px;
+    }
+
+    @media (max-width: 480px) {
+      width: 40px;
+      height: 40px;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+
+      @media (max-width: 768px) {
+        width: 22px;
+        height: 22px;
+      }
+
+      @media (max-width: 480px) {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      border: none;
+    }
+  }
+
+  .skip-btn {
+    width: 44px;
+    height: 44px;
+
+    @media (max-width: 768px) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media (max-width: 480px) {
+      width: 36px;
+      height: 36px;
+      display: none; // Hide skip buttons on mobile
+    }
+
+    svg {
+      width: 22px;
+      height: 22px;
+
+      @media (max-width: 768px) {
+        width: 20px;
+        height: 20px;
+      }
+
+      @media (max-width: 480px) {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  .play-pause-btn {
+    width: 56px;
+    height: 56px;
+
+    @media (max-width: 768px) {
+      width: 52px;
+      height: 52px;
+    }
+
+    @media (max-width: 480px) {
+      width: 48px;
+      height: 48px;
+    }
+
+    svg {
+      width: 28px;
+      height: 28px;
+
+      @media (max-width: 768px) {
+        width: 26px;
+        height: 26px;
+      }
+
+      @media (max-width: 480px) {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .volume-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @media (max-width: 480px) {
+      gap: 0.25rem;
+    }
+
+    .volume-slider {
+      width: 100px;
+      height: 5px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+
+      @media (max-width: 768px) {
+        width: 80px;
+        height: 4px;
+      }
+
+      @media (max-width: 640px) {
+        width: 70px;
+      }
+
+      @media (max-width: 480px) {
+        width: 60px;
+        display: block;
+      }
+
+      @media (max-width: 360px) {
+        display: none;
+      }
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        background: var(--accent, #ffffff);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+      }
+
+      &::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+        background: var(--accent, #ffffff);
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      &:hover {
+        height: 6px;
+
+        @media (max-width: 768px) {
+          height: 5px;
+        }
+
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
+          transform: scale(1.3);
+        }
+      }
+
+      &:active {
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
+          transform: scale(1.4);
+        }
+      }
+    }
+  }
+
+  .time-display {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: 'Work Sans', monospace;
+    white-space: nowrap;
+
+    @media (max-width: 768px) {
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.8rem;
+    }
+
+    .time-separator {
+      opacity: 0.7;
+      margin: 0 0.125rem;
+    }
+  }
+
+  .skip-btn {
+    width: 44px;
+    height: 44px;
+
+    @media (max-width: 768px) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media (max-width: 480px) {
+      width: 36px;
+      height: 36px;
+      display: none; // Hide skip buttons on mobile
+    }
+
+    svg {
+      width: 22px;
+      height: 22px;
+
+      @media (max-width: 768px) {
+        width: 20px;
+        height: 20px;
+      }
+
+      @media (max-width: 480px) {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  .settings-container {
+    position: relative;
+
+    .settings-btn {
+      @media (max-width: 480px) {
+        width: 36px;
+        height: 36px;
+
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+
+  .settings-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    animation: fadeIn 0.2s ease;
+    pointer-events: auto;
+  }
+
+  .settings-slider {
+    position: absolute;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 9999;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      width: 300px;
+      right: -300px;
+    }
+
+    @media (max-width: 480px) {
+      width: 75%;
+      right: -75%;
+    }
+
+    @media (max-width: 360px) {
+      width: 70%;
+      right: -70%;
+    }
+
+    &.open {
+      right: 0;
+    }
+
+    .settings-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      flex-shrink: 0;
+
+      @media (max-width: 480px) {
+        padding: 1rem;
+      }
+
+      @media (max-width: 360px) {
+        padding: 0.875rem;
+      }
+
+      h3 {
+        color: #ffffff;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+
+        @media (max-width: 480px) {
+          font-size: 1rem;
+        }
+
+        @media (max-width: 360px) {
+          font-size: 0.95rem;
+        }
+      }
+
+      .settings-close-btn {
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: background 0.2s ease;
+        flex-shrink: 0;
+
+        @media (max-width: 480px) {
+          width: 36px;
+          height: 36px;
+        }
+
+        svg {
+          width: 24px;
+          height: 24px;
+
+          @media (max-width: 480px) {
+            width: 20px;
+            height: 20px;
+          }
+        }
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        &:active {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        &:focus,
+        &:focus-visible {
+          outline: none;
+          border: none;
+        }
+      }
+    }
+
+    .settings-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0.5rem 0;
+
+        .settings-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 1rem 1.5rem;
+          cursor: pointer;
+          transition: background 0.2s ease;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          outline: none;
+          -webkit-tap-highlight-color: transparent;
+
+          @media (max-width: 480px) {
+            padding: 0.875rem 1rem;
+          }
+
+          @media (max-width: 360px) {
+            padding: 0.75rem 0.875rem;
+          }
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.05);
+          }
+
+          &:active {
+            background: rgba(255, 255, 255, 0.1);
+          }
+
+          &:focus,
+          &:focus-visible {
+            outline: none;
+            border: none;
+          }
+
+          .settings-item-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+
+            .settings-item-icon {
+              width: 24px;
+              height: 24px;
+              color: #ffffff;
+              flex-shrink: 0;
+
+              @media (max-width: 480px) {
+                width: 20px;
+                height: 20px;
+              }
+
+              @media (max-width: 360px) {
+                width: 18px;
+                height: 18px;
+              }
+            }
+
+            .settings-item-text {
+              color: #ffffff;
+              font-size: 1rem;
+              font-weight: 400;
+
+              @media (max-width: 480px) {
+                font-size: 0.9rem;
+              }
+
+              @media (max-width: 360px) {
+                font-size: 0.85rem;
+              }
+            }
+          }
+
+          .settings-item-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+
+            .settings-item-value {
+              color: rgba(255, 255, 255, 0.7);
+              font-size: 0.9rem;
+
+              @media (max-width: 480px) {
+                font-size: 0.85rem;
+              }
+
+              @media (max-width: 360px) {
+                font-size: 0.8rem;
+              }
+            }
+
+            .settings-item-arrow {
+              width: 20px;
+              height: 20px;
+              color: rgba(255, 255, 255, 0.5);
+
+              @media (max-width: 480px) {
+                width: 18px;
+                height: 18px;
+              }
+
+              @media (max-width: 360px) {
+                width: 16px;
+                height: 16px;
+              }
+            }
+          }
+
+          .toggle-switch {
+            width: 48px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            position: relative;
+            transition: background 0.2s ease;
+
+            @media (max-width: 480px) {
+              width: 42px;
+              height: 24px;
+              border-radius: 12px;
+            }
+
+            @media (max-width: 360px) {
+              width: 38px;
+              height: 22px;
+              border-radius: 11px;
+            }
+
+            &.on {
+              background: var(--accent, #ffffff);
+            }
+
+            .toggle-slider {
+              width: 24px;
+              height: 24px;
+              background: #ffffff;
+              border-radius: 50%;
+              position: absolute;
+              top: 2px;
+              left: 2px;
+              transition: transform 0.2s ease;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+              @media (max-width: 480px) {
+                width: 20px;
+                height: 20px;
+                top: 2px;
+                left: 2px;
+              }
+
+              @media (max-width: 360px) {
+                width: 18px;
+                height: 18px;
+                top: 2px;
+                left: 2px;
+              }
+            }
+
+            &.on .toggle-slider {
+              transform: translateX(20px);
+
+              @media (max-width: 480px) {
+                transform: translateX(18px);
+              }
+
+              @media (max-width: 360px) {
+                transform: translateX(16px);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .settings-submenu {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 0;
+
+      .settings-submenu-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        flex-shrink: 0;
+        justify-content: space-between;
+
+        @media (max-width: 480px) {
+          padding: 1rem;
+          gap: 0.75rem;
+        }
+
+        @media (max-width: 360px) {
+          padding: 0.875rem;
+          gap: 0.5rem;
+        }
+
+        h3 {
+          flex: 1;
+          margin: 0;
+          font-size: 1.1rem;
+
+          @media (max-width: 480px) {
+            font-size: 1rem;
+          }
+
+          @media (max-width: 360px) {
+            font-size: 0.95rem;
+          }
+        }
+
+        .settings-back-btn {
+          background: transparent;
+          border: none;
+          color: #ffffff;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          border-radius: 50%;
+          transition: background 0.2s ease;
+          flex-shrink: 0;
+          padding: 0;
+          margin: 0;
+          outline: none;
+
+          @media (max-width: 480px) {
+            width: 32px;
+            height: 32px;
+          }
+
+          @media (max-width: 360px) {
+            width: 28px;
+            height: 28px;
+          }
+
+          .back-icon {
+            width: 24px;
+            height: 24px;
+            color: #ffffff;
+            display: block;
+            flex-shrink: 0;
+
+            @media (max-width: 480px) {
+              width: 18px;
+              height: 18px;
+            }
+
+            @media (max-width: 360px) {
+              width: 16px;
+              height: 16px;
+            }
+          }
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+
+          &:active {
+            background: rgba(255, 255, 255, 0.2);
+          }
+
+          &:focus,
+          &:focus-visible {
+            outline: none;
+            border: none;
+          }
+        }
+
+        .settings-close-btn {
+          background: transparent;
+          border: none;
+          color: #ffffff;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          border-radius: 50%;
+          transition: background 0.2s ease;
+          flex-shrink: 0;
+          padding: 0;
+          margin: 0;
+          outline: none;
+          -webkit-tap-highlight-color: transparent;
+
+          @media (max-width: 480px) {
+            width: 36px;
+            height: 36px;
+          }
+
+          svg {
+            width: 24px;
+            height: 24px;
+            display: block;
+
+            @media (max-width: 480px) {
+              width: 20px;
+              height: 20px;
+            }
+          }
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+
+          &:active {
+            background: rgba(255, 255, 255, 0.2);
+          }
+
+          &:focus,
+          &:focus-visible {
+            outline: none;
+            border: none;
+          }
+        }
+
+        h3 {
+          color: #ffffff;
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin: 0;
+          flex: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          @media (max-width: 480px) {
+            font-size: 1.1rem;
+          }
+        }
+      }
+
+      .settings-submenu-list {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0.5rem 0;
+        -webkit-overflow-scrolling: touch;
+
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 3px;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.3);
+          }
+        }
+
+        .settings-submenu-item {
+          padding: 1rem 1.5rem;
+          color: #ffffff;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background 0.2s ease;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          min-height: 48px;
+          outline: none;
+          -webkit-tap-highlight-color: transparent;
+
+          @media (max-width: 480px) {
+            padding: 0.875rem 1rem;
+            font-size: 0.9rem;
+            min-height: 44px;
+          }
+
+          @media (max-width: 360px) {
+            padding: 0.75rem 0.875rem;
+            font-size: 0.85rem;
+            min-height: 40px;
+          }
+
+          @media (max-width: 480px) {
+            padding: 0.875rem 1rem;
+            font-size: 0.9rem;
+            min-height: 44px;
+          }
+
+          @media (max-width: 360px) {
+            padding: 0.75rem 0.875rem;
+            font-size: 0.85rem;
+            min-height: 40px;
+          }
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.05);
+          }
+
+          &.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent, #ffffff);
+            font-weight: 500;
+          }
+
+          &:active {
+            background: rgba(255, 255, 255, 0.15);
+          }
+
+          &:focus,
+          &:focus-visible {
+            outline: none;
+            border: none;
+          }
+
+          &:focus,
+          &:focus-visible {
+            outline: none;
+            border: none;
+          }
+
+          span {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+    }
+  }
+
+  .fullscreen-btn {
+    @media (max-width: 480px) {
+      width: 36px;
+      height: 36px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  .buffering-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    pointer-events: none;
+
+    .buffering-icon {
+      width: 80px;
+      height: 80px;
+      animation: spin 2s linear infinite;
+
+      @media (max-width: 768px) {
+        width: 60px;
+        height: 60px;
+      }
+
+      @media (max-width: 480px) {
+        width: 50px;
+        height: 50px;
+      }
+
+      .arch-bg-buffering {
+        fill: rgba(255, 255, 255, 0.9);
+        transition: fill 0.3s ease;
+      }
+
+      .arch-path-buffering {
+        fill: var(--accent, #000000);
+        transition: fill 0.3s ease;
+      }
+    }
+  }
+
+  [data-theme="dark"] .buffering-icon {
+    .arch-bg-buffering {
+      fill: rgba(0, 0, 0, 0.9);
+    }
+
+    .arch-path-buffering {
+      fill: var(--accent, #ffffff);
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// Hide default YouTube controls when custom controls are visible
+.video-player-wrapper.controls-visible ~ .player-controls-overlay {
+  .youtube-player {
+    pointer-events: none;
+  }
+}
+

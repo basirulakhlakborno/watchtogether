@@ -1,304 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
-    <title>Basirul Akhlak Borno | Full Stack Developer Portfolio</title>
-    <meta name="title" content="Basirul Akhlak Borno | Full Stack Developer Portfolio">
-    <meta name="description" content="Basirul Akhlak Borno - Professional Full Stack Developer specializing in modern web technologies. Building scalable applications with React, Node.js, Python, and more. View my portfolio and projects.">
-    <meta name="keywords" content="Basirul Akhlak Borno, full stack developer, web developer, react developer, node.js developer, python developer, portfolio, software engineer, frontend developer, backend developer">
-    <meta name="author" content="Basirul Akhlak Borno">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="revisit-after" content="7 days">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourportfolio.com/">
-    <meta property="og:title" content="Basirul Akhlak Borno | Full Stack Developer Portfolio">
-    <meta property="og:description" content="Basirul Akhlak Borno - Professional Full Stack Developer specializing in modern web technologies. Building scalable applications with React, Node.js, Python, and more.">
-    <meta property="og:image" content="https://yourportfolio.com/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Basirul Akhlak Borno - Portfolio">
-    <meta property="og:locale" content="en_US">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://yourportfolio.com/">
-    <meta property="twitter:title" content="Basirul Akhlak Borno | Full Stack Developer Portfolio">
-    <meta property="twitter:description" content="Basirul Akhlak Borno - Professional Full Stack Developer specializing in modern web technologies. Building scalable applications with React, Node.js, Python, and more.">
-    <meta property="twitter:image" content="https://yourportfolio.com/twitter-image.jpg">
-    <meta property="twitter:creator" content="@yourtwitterhandle">
-    
-    <!-- Additional Meta Tags -->
-    <meta name="theme-color" content="#000000">
-    <meta name="msapplication-TileColor" content="#000000">
-    <meta name="application-name" content="Basirul Akhlak Borno - Portfolio">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://yourportfolio.com/">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Preconnect for Performance -->
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-</head>
-<body>
-    <div class="scanlines"></div>
-    <div class="noise"></div>
-    
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <span class="glitch" data-text="DEV">DEV</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">HOME</a></li>
-                <li><a href="#about" class="nav-link">ABOUT</a></li>
-                <li><a href="#skills" class="nav-link">SKILLS</a></li>
-            </ul>
-            <div class="nav-social">
-                <a href="mailto:basirulakhlak@gmail.com" class="nav-social-link" title="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://github.com/basirulakhlakborno" class="nav-social-link" target="_blank" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://facebook.com/BorNoBXE" class="nav-social-link" target="_blank" title="Facebook">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://instagram.com/bornosixninez" class="nav-social-link" target="_blank" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+    <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Karla:ital,wght@0,200..800;1,200..800&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>SynsEvo</title>
+    <style>
+      #loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--bg-primary, #ffffff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+        opacity: 1;
+        transition: opacity 0.5s ease-out, background-color 0.3s ease;
+      }
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-info">
-                <h1 class="glitch-title" data-text="FULL STACK DEVELOPER">FULL STACK DEVELOPER</h1>
-                <p class="subtitle">Building the future, one line of code at a time</p>
-                <div class="hero-buttons">
-                    <a href="https://github.com/basirulakhlakborno" class="btn btn-primary" target="_blank">
-                        <i class="fab fa-github"></i>
-                        GITHUB
-                    </a>
-                    <a href="mailto:basirulakhlak@gmail.com" class="btn btn-secondary">
-                        <i class="fas fa-envelope"></i>
-                        EMAIL
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>SCROLL</span>
-            <div class="scroll-line"></div>
-        </div>
-    </section>
+      #loading-overlay.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="section-number">01</span>
-                ABOUT
-            </h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <div class="cyber-frame">
-                        <div class="frame-content">
-                            <div class="github-profile">
-                                <h3 style="margin-bottom: 1.5rem; font-family: 'Orbitron', sans-serif; font-size: 1.2rem; letter-spacing: 2px; text-align: center; color: var(--primary-black);">GITHUB PROFILE</h3>
-                                <div class="github-embed-container">
-                                    <div class="github-profile-card" id="githubProfileCard">
-                                        <div class="github-loading" id="githubLoading">
-                                            <i class="fab fa-github" style="font-size: 2rem; color: var(--text-gray); animation: pulse 2s infinite;"></i>
-                                            <p style="margin-top: 1rem; color: var(--text-gray);">Loading profile...</p>
-                                        </div>
-                                        <div class="github-profile-header" id="githubProfileHeader" style="display: none;">
-                                            <img id="githubAvatar" src="" alt="GitHub Avatar" class="github-avatar" onerror="this.src='https://github.com/identicons/basirulakhlakborno.png'">
-                                            <div class="github-profile-info">
-                                                <h4 id="githubName" style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin-bottom: 0.5rem;"></h4>
-                                                <p id="githubUsername" style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;"></p>
-                                                <p id="githubBio" style="color: var(--text-dark); font-size: 0.85rem; margin-bottom: 1rem; font-style: italic; min-height: 1.5rem;"></p>
-                                                <div class="github-profile-stats" style="display: flex; justify-content: space-around; margin: 1rem 0; padding: 1rem 0; border-top: 1px solid var(--accent-gray); border-bottom: 1px solid var(--accent-gray);">
-                                                    <div style="text-align: center;">
-                                                        <div id="githubRepos" style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--primary-black);">0</div>
-                                                        <div style="font-size: 0.75rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px;">Repos</div>
-                                                    </div>
-                                                    <div style="text-align: center;">
-                                                        <div id="githubFollowers" style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--primary-black);">0</div>
-                                                        <div style="font-size: 0.75rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px;">Followers</div>
-                                                    </div>
-                                                    <div style="text-align: center;">
-                                                        <div id="githubFollowing" style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--primary-black);">0</div>
-                                                        <div style="font-size: 0.75rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px;">Following</div>
-                                                    </div>
-                                                </div>
-                                                <div id="githubLocation" class="github-profile-location" style="color: var(--text-gray); font-size: 0.85rem; margin-bottom: 1rem; display: none;">
-                                                    <i class="fas fa-map-marker-alt"></i> <span id="githubLocationText"></span>
-                                                </div>
-                                                <div id="githubBlog" style="margin-bottom: 1rem; display: none;">
-                                                    <a id="githubBlogLink" href="#" target="_blank" style="color: var(--primary-black); text-decoration: none; font-size: 0.85rem;">
-                                                        <i class="fas fa-link"></i> <span id="githubBlogText"></span>
-                                                    </a>
-                                                </div>
-                                                <a id="githubProfileLink" href="https://github.com/basirulakhlakborno" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; font-size: 0.85rem; width: 100%; justify-content: center;">
-                                                    <i class="fab fa-github"></i>
-                                                    VIEW PROFILE
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-text">
-                    <p class="cyber-text">
-                        I'm Basirul Akhlak Borno, a passionate developer from Jamalpur, Bangladesh who thrives in the digital realm. 
-                        My code is clean, efficient, and always pushing boundaries.
-                    </p>
-                    <p class="cyber-text">
-                        With expertise spanning multiple technologies, I craft 
-                        solutions that bridge the gap between imagination and reality. 
-                        Believe in yourself, listen to your gut, and do what you love.
-                    </p>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="50">0</div>
-                            <div class="stat-label">PROJECTS</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="5">0</div>
-                            <div class="stat-label">YEARS</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="100">0</div>
-                            <div class="stat-label">CLIENTS</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      #loading-overlay.hidden {
+        display: none;
+      }
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="section-number">02</span>
-                SKILLS
-            </h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon-wrapper">
-                        <i class="devicon-react-original colored"></i>
-                    </div>
-                    <h3>FRONTEND</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">
-                            <i class="devicon-react-original"></i>
-                            React
-                        </span>
-                        <span class="skill-tag">
-                            <i class="devicon-vuejs-plain"></i>
-                            Vue.js
-                        </span>
-                        <span class="skill-tag">
-                            <i class="devicon-typescript-plain"></i>
-                            TypeScript
-                        </span>
-                        <span class="skill-tag">
-                            <i class="devicon-html5-plain"></i>
-                            HTML/CSS
-                        </span>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon-wrapper">
-                        <i class="devicon-nodejs-plain colored"></i>
-                    </div>
-                    <h3>BACKEND</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">
-                            <i class="devicon-nodejs-plain"></i>
-                            Node.js
-                        </span>
-                        <span class="skill-tag">
-                            <i class="devicon-python-plain"></i>
-                            Python
-                        </span>
-                        <span class="skill-tag">
-                            <i class="devicon-express-original"></i>
-                            Express
-                        </span>
-                        <span class="skill-tag">
-                            <i class="devicon-mongodb-plain"></i>
-                            MongoDB
-                        </span>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon-wrapper">
-                        <i class="devicon-git-plain colored"></i>
-                    </div>
-                    <h3>TOOLS</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">
-                            <i class="devicon-git-plain"></i>
-                            Git
-                        </span>
-                        <span class="skill-tag">
-                            <i class="devicon-docker-plain"></i>
-                            Docker
-                        </span>
-                        <span class="skill-tag">
-                            <i class="devicon-amazonwebservices-plain"></i>
-                            AWS
-                        </span>
-                        <span class="skill-tag">
-                            <i class="devicon-linux-plain"></i>
-                            Linux
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      .loading-icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Basirul Akhlak Borno. ALL RIGHTS RESERVED.</p>
-            <p class="footer-subtext">BUILT WITH CODE AND PASSION</p>
-        </div>
-    </footer>
+      .loading-icon {
+        width: 80px;
+        height: 80px;
+        animation: pulse 1.5s ease-in-out infinite;
+      }
 
-    <script src="script.js"></script>
-</body>
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.3;
+          transform: scale(0.95);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .loading-icon {
+          width: 60px;
+          height: 60px;
+        }
+      }
+
+      .arch-bg-loading {
+        fill: #ffffff;
+        transition: fill 0.3s ease;
+      }
+
+      .arch-path-loading {
+        fill: #000000;
+        transition: fill 0.3s ease;
+      }
+
+      [data-theme="dark"] #loading-overlay {
+        background-color: #000000;
+      }
+
+      [data-theme="dark"] .arch-bg-loading {
+        fill: #000000;
+      }
+
+      [data-theme="dark"] .arch-path-loading {
+        fill: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-overlay">
+      <div class="loading-icon-wrapper">
+        <svg 
+          class="loading-icon" 
+          xmlns="http://www.w3.org/2000/svg" 
+          aria-label="Arch Linux" 
+          role="img" 
+          viewBox="0 0 512 512"
+        >
+          <rect width="512" height="512" rx="15%" class="arch-bg-loading"></rect>
+          <path d="M256 72c-14 35-23 57-39 91 10 11 22 23 41 36-21-8-35-17-45-26-21 43-53 103-117 220 50-30 90-48 127-55-2-7-3-14-3-22v-1c1-33 18-58 38-56 20 1 36 29 35 62l-2 17c36 7 75 26 125 54l-27-50c-13-10-27-23-55-38 19 5 33 11 44 17-86-159-93-180-122-250z" class="arch-path-loading"></path>
+        </svg>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
-

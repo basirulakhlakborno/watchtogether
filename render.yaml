@@ -1,0 +1,30 @@
+services:
+  # Backend Service
+  - type: web
+    name: readme-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: FRONTEND_URL
+        sync: false  # Set this in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true  # Auto-generate a secure secret
+
+  # Frontend Static Site
+  - type: web
+    name: readme-frontend
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false  # Set this in Render dashboard after backend deploys
+      - key: VITE_SOCKET_URL
+        sync: false  # Set this in Render dashboard after backend deploys
+

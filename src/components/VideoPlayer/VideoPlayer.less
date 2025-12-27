@@ -1,0 +1,106 @@
+.video-player-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  border-radius: 12px;
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+
+  // Show controls on hover
+  &:hover .player-controls-overlay {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .youtube-player {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    touch-action: manipulation;
+    pointer-events: auto;
+    z-index: 1;
+
+    > div {
+      width: 100% !important;
+      height: 100% !important;
+      position: relative;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    iframe {
+      width: 100% !important;
+      height: 100% !important;
+      border: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: auto;
+      touch-action: manipulation;
+      z-index: 1;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+  }
+}
+
+.video-player-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: visible;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
+  z-index: 0;
+
+  .placeholder-content {
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 0.95rem;
+    max-width: 90%;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 1rem;
+    box-sizing: border-box;
+
+    p {
+      margin: 0;
+      line-height: 1.5;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 0.875rem;
+      padding: 0.75rem;
+      max-width: 85%;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      max-width: 80%;
+    }
+  }
+}
+
