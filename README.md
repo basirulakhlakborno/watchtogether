@@ -65,19 +65,25 @@ npm start
 
 ## 🔧 Environment Variables
 
-### Frontend (.env)
+### Frontend
+1. Copy `.env.example` to `.env` in the root directory
+2. Update the values as needed:
 ```env
 VITE_API_URL=http://localhost:3000/api
 VITE_SOCKET_URL=http://localhost:3000
 ```
 
-### Backend (.env)
+### Backend
+1. Copy `backend/.env.example` to `backend/.env`
+2. Update the values as needed:
 ```env
 FRONTEND_URL=http://localhost:5173
 JWT_SECRET=your-secret-key-here
 PORT=3000
 NODE_ENV=development
 ```
+
+**Note:** The `.env.example` files are provided as templates. Copy them to `.env` and fill in your actual values. Never commit `.env` files to Git!
 
 ## 📖 Usage
 
